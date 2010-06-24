@@ -1,11 +1,11 @@
 %define pkgname ronn
 Summary:	Markdown to man and HTML translator
 Name:		ruby-ronn
-Version:	0.7.0
+Version:	0.7.3
 Release:	0.1
 License:	MIT
-Source0:	http://github.com/rtomayko/ronn/tarball/0.7.0/%{name}-%{version}.tar.gz
-# Source0-md5:	bcdcf74d931e2f8442b063bfbc9788df
+Source0:	http://github.com/rtomayko/ronn/tarball/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	6fce1de64c54b014b88270567c29b5ce
 Group:		Development/Languages
 URL:		http://github.com/rtomayko/ronn
 Requires:	ruby-hpricot
