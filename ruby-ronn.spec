@@ -1,10 +1,21 @@
+%bcond_with	gitmaster	# build latest git version, build with n5 builder flag
+
+%if %{with gitmaster}
+%define dl_ver	master
+%else
+%define dl_ver	%version
+%endif
+
 %define pkgname ronn
+
+%define		rel	0.1
+
 Summary:	Markdown to man and HTML translator
 Name:		ruby-ronn
 Version:	0.7.3
-Release:	0.1
+Release:	%{?with_gitmaster:master.}%{rel}
 License:	MIT
-Source0:	http://github.com/rtomayko/ronn/tarball/%{version}/%{name}-%{version}.tar.gz
+Source0:	http://github.com/rtomayko/ronn/tarball/%{dl_ver}/%{name}-%{dl_ver}.tar.gz
 # Source0-md5:	6fce1de64c54b014b88270567c29b5ce
 Group:		Development/Languages
 URL:		http://github.com/rtomayko/ronn
