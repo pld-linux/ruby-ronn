@@ -116,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_rubylibdir}/%{pkgname}.rb
 %{ruby_rubylibdir}/%{pkgname}
 
-%files -n %{pkgname}
+%files -n ronn
 %{_bindir}/%{pkgname}
 %{_mandir}/man1/%{pkgname}.1*
 %{_mandir}/man7/%{pkgname}-format.7*
