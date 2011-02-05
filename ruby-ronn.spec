@@ -3,7 +3,7 @@
 %if %{with gitmaster}
 %define dl_ver	master
 %else
-%define dl_ver	%version
+%define dl_ver	%{version}
 %endif
 
 %define pkgname ronn
@@ -19,13 +19,13 @@ Source0:	http://github.com/rtomayko/ronn/tarball/%{dl_ver}/%{name}-%{dl_ver}.tar
 # Source0-md5:	6fce1de64c54b014b88270567c29b5ce
 Group:		Development/Languages
 URL:		http://github.com/rtomayko/ronn
-Requires:	ruby-hpricot
-Requires:	ruby-mustache
-Requires:	ruby-rdiscount
 BuildRequires:	rpmbuild(macros) >= 1.484
 BuildRequires:	ruby >= 1:1.8.6
 BuildRequires:	ruby-modules
 BuildRequires:	setup.rb
+Requires:	ruby-hpricot
+Requires:	ruby-mustache
+Requires:	ruby-rdiscount
 %{?ruby_mod_ver_requires_eq}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -117,7 +117,8 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_rubylibdir}/%{pkgname}
 
 %files -n ronn
-%{_bindir}/%{pkgname}
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/%{pkgname}
 %{_mandir}/man1/%{pkgname}.1*
 %{_mandir}/man7/%{pkgname}-format.7*
 
