@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	tests		# build without tests
+
 %define pkgname ronn
 Summary:	Markdown to man and HTML translator
 Name:		ruby-ronn
@@ -64,6 +68,11 @@ mv rtomayko-ronn-*/* .
 %{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
 
 %build
+# do trivial version check
+%if %{with tests}
+./bin/ronn --version
+%endif
+
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
 rm -r ri/lib/ronn/template
