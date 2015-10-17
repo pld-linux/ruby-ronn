@@ -4,9 +4,9 @@
 
 %define pkgname ronn
 Summary:	Markdown to man and HTML translator
-Name:		ruby-ronn
+Name:		ruby-%{pkgname}
 Version:	0.7.3
-Release:	1
+Release:	2
 License:	MIT
 Source0:	http://github.com/rtomayko/ronn/tarball/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	6fce1de64c54b014b88270567c29b5ce
@@ -72,6 +72,12 @@ mv rtomayko-ronn-*/* .
 %{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
 
 %build
+# make gemspec self-contained
+ruby -r rubygems -e 'spec = eval(File.read("%{pkgname}.gemspec"))
+	File.open("%{pkgname}-%{version}.gemspec", "w") do |file|
+	file.puts spec.to_ruby_for_cache
+end'
+
 # do trivial version check
 %if %{with tests}
 %{__ruby} -Ilib ./bin/ronn --version
@@ -85,12 +91,13 @@ rm ri/cache.ri
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{1,7},%{ruby_vendorlibdir},%{ruby_ridir},%{ruby_rdocdir}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{1,7},%{ruby_vendorlibdir},%{ruby_specdir},%{ruby_ridir},%{ruby_rdocdir}}
 
 cp -a bin/* $RPM_BUILD_ROOT%{_bindir}
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_vendorlibdir}
 cp -p man/*.1 $RPM_BUILD_ROOT%{_mandir}/man1
 cp -p man/*.7 $RPM_BUILD_ROOT%{_mandir}/man7
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
 
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
@@ -103,6 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES README.md
 %{ruby_vendorlibdir}/ronn.rb
 %{ruby_vendorlibdir}/ronn
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %files -n ronn
 %defattr(644,root,root,755)
