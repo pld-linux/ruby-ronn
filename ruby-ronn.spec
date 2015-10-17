@@ -70,7 +70,7 @@ mv rtomayko-ronn-*/* .
 %build
 # do trivial version check
 %if %{with tests}
-./bin/ronn --version
+%{__ruby} -Ilib ./bin/ronn --version
 %endif
 
 rdoc --ri --op ri lib
