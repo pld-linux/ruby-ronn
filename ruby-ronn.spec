@@ -14,6 +14,10 @@ Group:		Development/Languages
 URL:		https://github.com/rtomayko/ronn
 BuildRequires:	rpm-rubyprov
 BuildRequires:	rpmbuild(macros) >= 1.665
+%if %{with tests}
+BuildRequires:	ruby-hpricot
+BuildRequires:	ruby-rdiscount
+%endif
 Requires:	ruby-hpricot
 Requires:	ruby-mustache
 Requires:	ruby-rdiscount
