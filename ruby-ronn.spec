@@ -4,11 +4,12 @@
 
 %define pkgname ronn
 Summary:	Markdown to man and HTML translator
+Summary(pl.UTF-8):	Konwerter języka Markdown do podręcznika man i HTML-a
 Name:		ruby-%{pkgname}
 Version:	0.7.3
 Release:	2
 License:	MIT
-Source0:	http://github.com/rtomayko/ronn/tarball/%{version}/%{name}-%{version}.tar.gz
+Source0:	https://github.com/rtomayko/ronn/tarball/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	6fce1de64c54b014b88270567c29b5ce
 Group:		Development/Languages
 URL:		https://github.com/rtomayko/ronn
@@ -25,10 +26,15 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Ruby library for ronn.
+Ruby library for ronn (Markdown to man and HTML translator).
+
+%description -l pl.UTF-8
+Biblioteka języka Ruby dla programu ronn (konwertera języka Markdown
+do podręcznika man i HTML-a).
 
 %package -n ronn
 Summary:	Markdown to man and HTML translator
+Summary(pl.UTF-8):	Konwerter języka Markdown do podręcznika man i HTML-a
 Group:		Applications/Publishing
 Requires:	%{name} = %{version}-%{release}
 
@@ -41,9 +47,19 @@ structure and syntax extensions for features commonly found in
 manpages (definition lists, link notation, etc.). The ronn-format(7)
 manual page defines the format in detail.
 
+%description -n ronn -l pl.UTF-8
+Ronn buduje podręczniki. Konwertuje proste, czytelne dla człowieka
+pliki tekstowe do formatu roff (do wyświetlania na terminalu) oraz
+HTML-a (dla WWW).
+
+Format źródłowy obejmuje całość języka Markdown, ale ma nieco
+ściślejszą strukturę oraz rozszerzenia składni pod kątem możliwości
+stron podręcznika (listy definicji, notacja odnośników itp.). Strona
+podręcznika ronn-format(7) szczegółowo określa format.
+
 %package rdoc
 Summary:	HTML documentation for %{pkgname}
-Summary(pl.UTF-8):	Dokumentacja w formacie HTML dla %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie HTML dla pakietu %{pkgname}
 Group:		Documentation
 Requires:	ruby >= 1:1.8.7-4
 
@@ -51,11 +67,11 @@ Requires:	ruby >= 1:1.8.7-4
 HTML documentation for %{pkgname}.
 
 %description rdoc -l pl.UTF-8
-Dokumentacja w formacie HTML dla %{pkgname}.
+Dokumentacja w formacie HTML dla pakietu %{pkgname}.
 
 %package ri
 Summary:	ri documentation for %{pkgname}
-Summary(pl.UTF-8):	Dokumentacja w formacie ri dla %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie ri dla pakietu %{pkgname}
 Group:		Documentation
 Requires:	ruby
 
@@ -63,7 +79,7 @@ Requires:	ruby
 ri documentation for %{pkgname}.
 
 %description ri -l pl.UTF-8
-Dokumentacji w formacie ri dla %{pkgname}.
+Dokumentacji w formacie ri dla pakietu %{pkgname}.
 
 %prep
 %setup -qc
@@ -85,9 +101,9 @@ end'
 
 rdoc --ri --op ri lib
 rdoc --op rdoc lib
-rm -r ri/lib/ronn/template
-rm ri/created.rid
-rm ri/cache.ri
+%{__rm} -r ri/lib/ronn/template
+%{__rm} ri/created.rid
+%{__rm} ri/cache.ri
 
 %install
 rm -rf $RPM_BUILD_ROOT
