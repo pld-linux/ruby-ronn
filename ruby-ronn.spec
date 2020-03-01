@@ -1,3 +1,4 @@
+# TODO: project is continued as ronn-ng, https://github.com/apjanke/ronn-ng
 #
 # Conditional build:
 %bcond_without	tests		# build without tests
@@ -9,8 +10,9 @@ Name:		ruby-%{pkgname}
 Version:	0.7.3
 Release:	2
 License:	MIT
-Source0:	https://github.com/rtomayko/ronn/tarball/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	6fce1de64c54b014b88270567c29b5ce
+#Source0Download: https://github.com/rtomayko/ronn/releases
+Source0:	https://github.com/rtomayko/ronn/archive/%{version}/ronn-%{version}.tar.gz
+# Source0-md5:	90cdedb42920c8c2a74e2d177e9535b6
 Group:		Development/Languages
 URL:		https://github.com/rtomayko/ronn
 BuildRequires:	rpm-rubyprov
@@ -82,8 +84,7 @@ ri documentation for %{pkgname}.
 Dokumentacji w formacie ri dla pakietu %{pkgname}.
 
 %prep
-%setup -qc
-mv rtomayko-ronn-*/* .
+%setup -q -n ronn-%{version}
 
 %{__sed} -i -e '1 s,#!.*ruby,#!%{__ruby},' bin/*
 
