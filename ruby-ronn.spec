@@ -8,7 +8,7 @@ Summary:	Markdown to man and HTML translator
 Summary(pl.UTF-8):	Konwerter języka Markdown do podręcznika man i HTML-a
 Name:		ruby-%{pkgname}
 Version:	0.7.3
-Release:	2
+Release:	3
 License:	MIT
 #Source0Download: https://github.com/rtomayko/ronn/releases
 Source0:	https://github.com/rtomayko/ronn/archive/%{version}/ronn-%{version}.tar.gz
@@ -39,6 +39,7 @@ Summary:	Markdown to man and HTML translator
 Summary(pl.UTF-8):	Konwerter języka Markdown do podręcznika man i HTML-a
 Group:		Applications/Publishing
 Requires:	%{name} = %{version}-%{release}
+Requires:	groff
 
 %description -n ronn
 Ronn builds manuals. It converts simple, human readable textfiles to
